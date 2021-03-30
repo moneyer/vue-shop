@@ -13,12 +13,14 @@
         label-width="0"
         class="login_form"
       >
+        <!-- 用户名 -->
         <el-form-item prop="username">
           <el-input
             v-model="loginForm.username"
             prefix-icon="iconfont icon-user"
           />
         </el-form-item>
+        <!-- 密码 -->
         <el-form-item prop="password">
           <el-input
             v-model="loginForm.password"
@@ -26,6 +28,7 @@
             prefix-icon="iconfont icon-3702mima"
           />
         </el-form-item>
+        <!-- 登录与重置按钮 -->
         <el-form-item class="login_buttons">
           <el-button
             type="primary"
@@ -50,17 +53,19 @@ export default {
   name: 'Login',
   data() {
     return {
+      // 表单数据
       loginForm: {
         username: 'admin',
         password: '123456'
       },
+      // 表单数据验证规则
       loginFormRules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
+          { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
         ]
       }
@@ -71,7 +76,6 @@ export default {
     handleLogin() {
       const loginFormRef = this.$refs.loginFormRef
       loginFormRef.validate(async valid => {
-        console.log(valid)
         if (!valid) return
         const result = await login(this.loginForm)
         if (result.meta.status !== 200) {
@@ -82,7 +86,6 @@ export default {
         this.$message.success('登录成功')
         setToken(result.data.token)
         this.$router.push('/home')
-        console.log(result)
       })
     },
     // 点击重置按钮 重置登录表单

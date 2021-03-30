@@ -5,16 +5,16 @@ const presets = [
 
 const plugins = []
 
-// element-ui 按需引入 的babel 配置，但是看起来 不配置好像也没事
-const elementPlugin = [
-  'component',
-  {
-    libraryName: 'element-ui',
-    styleLibraryName: 'theme-chalk'
-  }
-]
+// element-ui 按需引入 的babel 配置，多次使用 太过繁琐  略去
+// const elementPlugin = [
+//   'component',
+//   {
+//     libraryName: 'element-ui',
+//     styleLibraryName: 'theme-chalk'
+//   }
+// ]
 
-plugins.push(elementPlugin)
+// plugins.push(elementPlugin)
 
 if (process.env['ENV'] === 'development') {
   plugins.push('dynamic-import-node')

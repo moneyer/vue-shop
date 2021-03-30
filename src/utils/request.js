@@ -3,12 +3,12 @@ import {
   // MessageBox,
   Message
 } from 'element-ui'
-import store from '@/store'
+// import store from '@/store'
 import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://www.ysqorz.top:8888/api/private/v1/',
+  baseURL: 'http://localhost:8888/api/private/v1/',
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
@@ -19,12 +19,12 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
 
-    if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      config.headers['token'] = getToken()
-    }
+    // if (store.getters.token) {
+    // let each request carry token
+    // ['X-Token'] is a custom headers key
+    // please modify it according to the actual situation
+    config.headers.Authorization = getToken()
+    // }
     return config
   },
   error => {
@@ -48,6 +48,13 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
+    // if (res.meta.status !== 200) {
+    //   Message({
+    //     message: res.meta.msg || 'Error',
+    //     type: 'error',
+    //     duration: 5 * 1000
+    //   })
+    // }
     return res
 
     // if the custom code is not 20000, it is judged as an error.

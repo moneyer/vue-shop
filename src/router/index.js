@@ -15,7 +15,18 @@ const routes = [
   },
   {
     path: '/home',
-    component: () => import('@/views/home/index')
+    redirect: '/welcome',
+    component: () => import('@/views/home/index'),
+    children: [
+      {
+        path: '/welcome',
+        component: () => import('@/views/welcome/index')
+      },
+      {
+        path: '/users',
+        component: () => import('@/views/users/index')
+      }
+    ]
   }
 ]
 

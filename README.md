@@ -1,4 +1,4 @@
-# my-vue-admin
+# vue-shop
 
 ## Project setup
 ```
