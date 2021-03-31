@@ -25,6 +25,11 @@ const routes = [
       {
         path: '/users',
         component: () => import('@/views/users/index')
+      },
+      // 数据报表页面
+      {
+        path: '/reports',
+        component: () => import('@/views/report/index')
       }
     ]
   }
