@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { login } from '@/api/login.js'
+import { loginApi } from '@/api/login.js'
 import { setToken } from '@/utils/auth'
 export default {
   name: 'Login',
@@ -77,7 +77,7 @@ export default {
       const loginFormRef = this.$refs.loginFormRef
       loginFormRef.validate(async valid => {
         if (!valid) return
-        const result = await login(this.loginForm)
+        const result = await loginApi(this.loginForm)
         if (result.meta.status !== 200) {
           this.$message.error('登录失败')
           // console.log('登录失败')

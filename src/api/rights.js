@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function getMenuListApi() {
+export function getRightsListApi(type) {
   return request({
-    url: 'menus',
+    url: `rights/${type}`,
     method: 'get'
   })
 }
