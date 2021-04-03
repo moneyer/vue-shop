@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function getUserList(queryInfo) {
+export function getUserListApi(queryInfo) {
   return request({
     url: 'users',
     method: 'get',
@@ -8,14 +8,14 @@ export function getUserList(queryInfo) {
   })
 }
 
-export function updateUserState(userInfo) {
+export function updateUserStateApi(userInfo) {
   return request({
     url: `users/${userInfo.id}/state/${userInfo.mg_state}`,
     method: 'put'
   })
 }
 
-export function addUser(data) {
+export function addUserApi(data) {
   return request({
     url: 'users',
     method: 'post',
@@ -23,14 +23,14 @@ export function addUser(data) {
   })
 }
 
-export function getUserById(id) {
+export function getUserByIdApi(id) {
   return request({
     url: 'users/' + id,
     method: 'get'
   })
 }
 
-export function updateUserById(userInfo) {
+export function updateUserByIdApi(userInfo) {
   return request({
     url: 'users/' + userInfo.id,
     method: 'put',
@@ -41,7 +41,7 @@ export function updateUserById(userInfo) {
   })
 }
 
-export function deleteUserById(id) {
+export function deleteUserByIdApi(id) {
   return request({
     url: 'users/' + id,
     method: 'delete'

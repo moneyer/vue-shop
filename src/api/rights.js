@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function getRightsList(type) {
+export function getRightsListApi(type) {
   return request({
     url: `rights/${type}`,
     method: 'get'

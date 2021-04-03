@@ -16,7 +16,7 @@ const plugins = []
 
 // plugins.push(elementPlugin)
 
-if (process.env['ENV'] === 'development') {
+if (process.env.NODE_ENV === 'development') {
   plugins.push('dynamic-import-node')
 }
 // 'env': {

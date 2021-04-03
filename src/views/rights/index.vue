@@ -44,7 +44,7 @@
 
 <script>
 import {
-  getRightsList
+  getRightsListApi
 } from '@/api/rights'
 
 export default {
@@ -55,11 +55,11 @@ export default {
     }
   },
   created() {
-    this.getRights()
+    this.getRightsList()
   },
   methods: {
-    async getRights() {
-      const result = await getRightsList('list')
+    async getRightsList() {
+      const result = await getRightsListApi('list')
       console.log(result)
       this.rightsList = result.data
     }

@@ -136,9 +136,9 @@
 <script>
 import EditUserDialog from './components/EditUserDialog.vue'
 import {
-  getUserList,
-  updateUserState,
-  deleteUserById
+  getUserListApi,
+  updateUserStateApi,
+  deleteUserByIdApi
 } from '@/api/users'
 export default {
   name: 'Users',
@@ -165,11 +165,11 @@ export default {
     }
   },
   created() {
-    this.getUsers()
+    this.getUserList()
   },
   methods: {
-    async getUsers() {
-      const result = await getUserList(this.queryInfo)
+    async getUserList() {
+      const result = await getUserListApi(this.queryInfo)
       if (result.meta.status !== 200) return this.$message.error('获取用户列表失败！')
       this.userList = result.data.users
       this.total = result.data.total
@@ -188,7 +188,7 @@ export default {
     },
     // 更新用户状态
     async handleUserStateChange(userInfo) {
-      const result = await updateUserState(userInfo)
+      const result = await updateUserStateApi(userInfo)
       console.log(result)
     },
     // 显示添加用户窗口
@@ -216,7 +216,7 @@ export default {
         return this.$message.info('已取消删除')
       }
 
-      const result = await deleteUserById(id)
+      const result = await deleteUserByIdApi(id)
 
       if (result.meta.status !== 200) {
         this.$message.error('删除用户失败')

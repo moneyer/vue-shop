@@ -145,8 +145,8 @@
           default-expand-all
         />
         <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          <el-button @click="rightDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="allotRights">确 定</el-button>
         </span>
       </el-dialog>
 
@@ -156,8 +156,9 @@
 
 <script>
 import {
-  getRolesList,
-  deleteRightById
+  getRolesListApi,
+  deleteRightApi,
+  allotRightApi
 } from '@/api/roles'
 import {
   getRightsList
@@ -184,12 +185,12 @@ export default {
     }
   },
   created() {
-    this.getData()
+    this.getRolesList()
   },
   methods: {
     // 获取所有角色的列表
-    async getData() {
-      const result = await getRolesList()
+    async getRolesList() {
+      const result = await getRolesListApi()
       this.rolesList = result.data
       console.log(result)
     },
@@ -209,7 +210,7 @@ export default {
         return this.$message.info('已取消删除')
       }
 
-      const result = await deleteRightById(role.id, rightId)
+      const result = await deleteRightApi(role.id, rightId)
 
       if (result.meta.status !== 200) {
         this.$message.error('删除权限失败')
@@ -244,6 +245,29 @@ export default {
     },
     handleClose() {
       this.defKeys = []
+    },
+    // 点击为角色分配权限
+    async allotRights() {
+      const treeRef = this.$refs.treeRef
+      const keys = [
+        ...treeRef.getCheckedKeys(),
+        ...treeRef.getHalfCheckedKeys()
+      ]
+      console.log(keys)
+
+      const keysString = keys.join(',')
+      const data = { rids: keysString }
+
+      const result = await allotRightApi(this.roleId, data)
+      if (result.meta.status !== 200) {
+        return this.$message.error('分配权限失败！')
+      }
+
+      this.$message.success('分配权限成功！')
+
+      this.getRolesList()
+
+      this.rightDialogVisible = false
     }
   }
 }

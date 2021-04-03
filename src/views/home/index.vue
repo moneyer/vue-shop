@@ -74,7 +74,7 @@
 
 <script>
 
-import { getMenuList } from '@/api/menu'
+import { getMenuListApi } from '@/api/menu'
 import { removeToken } from '@/utils/auth'
 export default {
   name: 'Home',
@@ -95,7 +95,7 @@ export default {
     }
   },
   created() {
-    this.getMenu()
+    this.getMenuList()
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
@@ -104,8 +104,8 @@ export default {
       this.$router.push('/login')
     },
     // 获取左侧菜单列表
-    async getMenu() {
-      const result = await getMenuList()
+    async getMenuList() {
+      const result = await getMenuListApi()
       // 处理失败逻辑，后期应该封装到axios的反应拦截上
       if (result.meta.status !== 200) return this.$message.error(result.meta.msg)
       this.menuList = result.data

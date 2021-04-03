@@ -56,9 +56,9 @@
 <script>
 
 import {
-  addUser,
-  getUserById,
-  updateUserById
+  addUserApi,
+  getUserByIdApi,
+  updateUserByIdApi
 } from '@/api/users'
 export default {
   name: 'EditUserDialog',
@@ -152,7 +152,7 @@ export default {
   methods: {
     async setData() {
       if (this.type !== 'add') {
-        const result = await getUserById(this.id)
+        const result = await getUserByIdApi(this.id)
         this.userForm = result.data
         console.log(result)
       }
@@ -167,7 +167,7 @@ export default {
       this.$refs.userFormRef.validate(async valid => {
         if (!valid) return
         console.log(this.userForm)
-        const result = await addUser(this.userForm)
+        const result = await addUserApi(this.userForm)
         if (result.meta.status !== 201) {
           return this.$message.error(`添加用户失败！`)
         }
@@ -181,7 +181,7 @@ export default {
     handleEditUserInfo() {
       this.$refs.userFormRef.validate(async valid => {
         if (!valid) return
-        const result = await updateUserById(this.userForm)
+        const result = await updateUserByIdApi(this.userForm)
         if (result.meta.status !== 200) {
           return this.$message.error(`更新用户信息失败！`)
         }
